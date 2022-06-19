@@ -41,6 +41,9 @@ var createTaskEl = function(taskDataObj) {
     taskInfoEl.innerHTML = "<h3 class='task-name'>" + taskDataObj.name + "</h3><span class='task-type'>" + taskDataObj.type + "</span>";
     listItemEl.appendChild(taskInfoEl);
 
+    var taskActionsEl = createTaskActions(taskIdCounter);
+    listItemEl.appendChild(taskActionsEl);
+
     // add entire list item to list
     tasksToDoEl.appendChild(listItemEl);
 
@@ -52,6 +55,7 @@ var createTaskActions = function(taskId) {
     var actionContainerEl = document.createElement("div");
     actionContainerEl.className = "task-actions";
 
+    // create edit button
     var editButtonEl = document.createElement("button");
     editButtonEl.textContent = "Edit";
     editButtonEl.className = "btn edit-btn";
