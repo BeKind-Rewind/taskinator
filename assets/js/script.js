@@ -1,6 +1,7 @@
+var taskIdCounter = 0;
+
 var formEl = document.querySelector("#task-form");
 var tasksToDoEl = document.querySelector("#tasks-to-do");
-var taskIdCounter = 0;
 var pageContentEl = document.querySelector("#page-content");
 var tasksInProgressEl = document.querySelector("#tasks-in-progress");
 var tasksCompletedEl = document.querySelector("#tasks-completed");
@@ -33,9 +34,10 @@ var taskFormHandler = function(event) {
             name: taskNameInput,
             type: taskTypeInput
         };
-    }
+    
     // send it as an argument to createTaskEl
     createTaskEl(taskDataObj);
+    }
 };
 
 var createTaskEl = function(taskDataObj) {
@@ -63,6 +65,7 @@ var createTaskEl = function(taskDataObj) {
 };
 
 var createTaskActions = function(taskId) {
+    // create container to hold elements
     var actionContainerEl = document.createElement("div");
     actionContainerEl.className = "task-actions";
 
@@ -79,16 +82,14 @@ var createTaskActions = function(taskId) {
     deleteButtonEl.textContent = "Delete";
     deleteButtonEl.className = "btn delete-btn";
     deleteButtonEl.setAttribute("data-task-id", taskId);
-
     actionContainerEl.appendChild(deleteButtonEl);
-
+    // create change status dropdown
     var statusSelectEl = document.createElement("select");
     statusSelectEl.setAttribute("name", "status-change");
     statusSelectEl.setAttribute("data-task-id", taskId);
     statusSelectEl.className = "select-status";
-
     actionContainerEl.appendChild(statusSelectEl);
-
+    // create status options
     var statusChoices = ["To Do", "In Progress", "Completed"];
 
     for (var i = 0; i < statusChoices.length; i++) {
@@ -105,7 +106,7 @@ var createTaskActions = function(taskId) {
 };
 
 var completeEditTask = function(taskName, taskType, taskId) {
-    // find the matching task list item
+    // find task list item with taskId value
     var taskSelected = document.querySelector(".task-item[data-task-id='" + taskId + "']");
 
     // set new values
@@ -183,7 +184,7 @@ var editTask = function(taskId) {
     formEl.querySelector("#save-task").textContent = "Save Task";
   };
 
-  var DeleteTask = function(taskId){
+  var deleteTask = function(taskId){
     console.log(taskId);
     // find task list element with taskId value and remove it
     var taskSelected = document.querySelector(".task-item[data-task-id='" + taskId + "']");
